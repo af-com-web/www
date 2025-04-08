@@ -110,17 +110,16 @@
       ]
       }
     </script>
+    
+    <!-- Google Analytics (moved inside head with defer) -->
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-3T3FFFXB9D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3T3FFFXB9D');
+    </script>
   </head>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3T3FFFXB9D"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3T3FFFXB9D');
-</script>
-
 
   <body style="--phoenix-scroll-margin-top: 1.2rem;">
 
@@ -770,7 +769,6 @@ gdpr@animafelix.com | www.animafelix.com</p>
     <script src="assets/vendors/isotope-packery/packery-mode.pkgd.min.js"></script>
     <script src="assets/vendors/bigpicture/BigPicture.js"></script>
     <script src="assets/vendors/countup/countUp.umd.js"></script>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
 
     <!-- iOS Detection and Custom App Banner Script -->
     <script>
