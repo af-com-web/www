@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Anima Felix</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JMJJRPNKJY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JMJJRPNKJY');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .loader {
+            text-align: center;
+            color: white;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h2 {
+            font-size: 24px;
+            margin: 0;
+            font-weight: 600;
+        }
+        p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+        <h2>Redirecting to Download...</h2>
+        <p>Taking you to the right place</p>
+    </div>
+
+    <script>
+        (function() {
+            // iOS App Store URL
+            const IOS_URL = 'https://apps.apple.com/app/id6708235955';
+
+            // Google Play Store URL
+            const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.animafelix';
+
+            // Homepage URL for desktop/other devices
+            const HOMEPAGE_URL = 'index.html';
+
+            /**
+             * Detect if the device is iOS
+             */
+            function isIOS() {
+                const userAgent = window.navigator.userAgent.toLowerCase();
+                return /iphone|ipad|ipod/.test(userAgent) && !window.MSStream;
+            }
+
+            /**
+             * Detect if the device is Android
+             */
+            function isAndroid() {
+                const userAgent = window.navigator.userAgent.toLowerCase();
+                return /android/.test(userAgent);
+            }
+
+            /**
+             * Detect if the device is mobile (iOS or Android)
+             */
+            function isMobile() {
+                return isIOS() || isAndroid();
+            }
+
+            /**
+             * Perform the redirect based on device detection
+             */
+            function redirect() {
+                let redirectURL;
+
+                if (isIOS()) {
+                    redirectURL = IOS_URL;
+                    console.log('iOS device detected, redirecting to App Store');
+                } else if (isAndroid()) {
+                    redirectURL = ANDROID_URL;
+                    console.log('Android device detected, redirecting to Google Play');
+                } else {
+                    redirectURL = HOMEPAGE_URL;
+                    console.log('Desktop/other device detected, redirecting to homepage');
+                }
+
+                // Perform the redirect immediately
+                window.location.href = redirectURL;
+            }
+
+            // Execute redirect when page loads
+            redirect();
+        })();
+    </script>
+</body>
+</html>
