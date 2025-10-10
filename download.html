@@ -14,6 +14,19 @@
       gtag('config', 'G-JMJJRPNKJY');
     </script>
 
+    <!-- TikTok Pixel Code Start -->
+    <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+      ttq.load('D3KKEP3C77U1STIOEG7G');
+      ttq.page();
+    }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
+
     <style>
         body {
             margin: 0;
@@ -96,28 +109,82 @@
             }
 
             /**
+             * Track TikTok Pixel events
+             */
+            function trackTikTokEvents(deviceType) {
+                // Ensure TikTok Pixel is loaded
+                if (typeof ttq === 'undefined') {
+                    console.warn('TikTok Pixel not loaded yet');
+                    return;
+                }
+
+                // Track ViewContent event - user viewed the download page
+                ttq.track('ViewContent', {
+                    "contents": [
+                        {
+                            "content_id": "download_page",
+                            "content_type": "product",
+                            "content_name": "Anima Felix App Download"
+                        }
+                    ],
+                    "value": 0,
+                    "currency": "USD"
+                });
+
+                // Track ClickButton event - user is being redirected to app store
+                ttq.track('ClickButton', {
+                    "contents": [
+                        {
+                            "content_id": deviceType === 'ios' ? 'app_store_ios' : deviceType === 'android' ? 'app_store_android' : 'website',
+                            "content_type": "product",
+                            "content_name": deviceType === 'ios' ? 'iOS App Store Redirect' : deviceType === 'android' ? 'Google Play Store Redirect' : 'Website Redirect'
+                        }
+                    ],
+                    "value": 0,
+                    "currency": "USD"
+                });
+
+                console.log('TikTok events tracked for device type:', deviceType);
+            }
+
+            /**
              * Perform the redirect based on device detection
              */
             function redirect() {
                 let redirectURL;
+                let deviceType;
 
                 if (isIOS()) {
                     redirectURL = IOS_URL;
+                    deviceType = 'ios';
                     console.log('iOS device detected, redirecting to App Store');
                 } else if (isAndroid()) {
                     redirectURL = ANDROID_URL;
+                    deviceType = 'android';
                     console.log('Android device detected, redirecting to Google Play');
                 } else {
                     redirectURL = HOMEPAGE_URL;
+                    deviceType = 'desktop';
                     console.log('Desktop/other device detected, redirecting to homepage');
                 }
 
-                // Perform the redirect immediately
-                window.location.href = redirectURL;
+                // Track TikTok events before redirect
+                trackTikTokEvents(deviceType);
+
+                // Small delay to ensure tracking fires before redirect
+                setTimeout(function() {
+                    window.location.href = redirectURL;
+                }, 300);
             }
 
             // Execute redirect when page loads
-            redirect();
+            // Wait a moment to ensure TikTok Pixel is loaded
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', redirect);
+            } else {
+                // If DOM is already loaded, add a small delay
+                setTimeout(redirect, 100);
+            }
         })();
     </script>
 </body>
