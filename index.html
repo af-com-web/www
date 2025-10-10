@@ -391,30 +391,49 @@
     <script src="assets/vendors/bigpicture/BigPicture.js"></script>
     <script src="assets/vendors/countup/countUp.umd.js"></script>
 
-    <!-- iOS Detection and Custom App Banner Script -->
+    <!-- Mobile Detection and Custom App Banner Script -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        // App Store URLs
+        const IOS_URL = 'https://apps.apple.com/app/apple-store/id6708235955?pt=127752760&ct=web&mt=8';
+        const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.animafelix';
+
         // Check if the user is on iOS
         function isIOS() {
           const userAgent = window.navigator.userAgent.toLowerCase();
           return /iphone|ipad|ipod/.test(userAgent) && !window.MSStream;
         }
 
+        // Check if the user is on Android
+        function isAndroid() {
+          const userAgent = window.navigator.userAgent.toLowerCase();
+          return /android/.test(userAgent);
+        }
+
+        // Check if mobile (iOS or Android)
+        function isMobile() {
+          return isIOS() || isAndroid();
+        }
+
         // Check if the banner has been dismissed within the last 7 days
         function shouldShowBanner() {
           const lastDismissed = localStorage.getItem('animaFelixBannerDismissed');
           if (!lastDismissed) return true;
-          
+
           const dismissedDate = new Date(parseInt(lastDismissed));
           const now = new Date();
           const daysSinceDismissed = Math.floor((now - dismissedDate) / (1000 * 60 * 60 * 24));
-          
+
           return daysSinceDismissed >= 7;
         }
 
         // Create and show the custom app banner
         function showAppBanner() {
-          if (!isIOS() || !shouldShowBanner()) return;
+          // Only show banner on mobile devices (iOS or Android)
+          if (!isMobile() || !shouldShowBanner()) return;
+
+          // Determine the correct app store URL
+          const appStoreURL = isAndroid() ? ANDROID_URL : IOS_URL;
 
           // Create banner element
           const banner = document.createElement('div');
@@ -430,7 +449,7 @@
                   <p class="mb-0 small">Get the best experience with our app</p>
                 </div>
                 <div class="col-4 col-sm-3 d-flex justify-content-end gap-2 align-items-center">
-                  <a href="https://apps.apple.com/app/apple-store/id6708235955?pt=127752760&ct=web&mt=8" class="btn btn-sm btn-light">Get</a>
+                  <a href="${appStoreURL}" class="btn btn-sm btn-light">Get</a>
                   <button type="button" class="btn-close btn-close-white" id="closeBanner" aria-label="Close"></button>
                 </div>
               </div>
@@ -439,7 +458,7 @@
 
           // Add banner to the page
           document.body.appendChild(banner);
-          
+
           // Handle close button click
           document.getElementById('closeBanner').addEventListener('click', function() {
             banner.remove();
@@ -450,6 +469,56 @@
         // Run the banner function
         showAppBanner();
       });
+    </script>
+
+    <!-- Dynamic App Store Links Script -->
+    <script>
+      (function() {
+        // App Store URLs
+        const IOS_URL = 'https://apps.apple.com/app/apple-store/id6708235955?pt=127752760&ct=web&mt=8';
+        const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.animafelix';
+
+        // Device detection functions
+        function isIOS() {
+          const userAgent = window.navigator.userAgent.toLowerCase();
+          return /iphone|ipad|ipod/.test(userAgent) && !window.MSStream;
+        }
+
+        function isAndroid() {
+          const userAgent = window.navigator.userAgent.toLowerCase();
+          return /android/.test(userAgent);
+        }
+
+        function isMobile() {
+          return isIOS() || isAndroid();
+        }
+
+        // Update all app store links on the page
+        function updateAppStoreLinks() {
+          // Determine which URL to use
+          let targetURL = IOS_URL; // Default to iOS
+
+          if (isAndroid()) {
+            targetURL = ANDROID_URL;
+          }
+
+          // Find all links that point to the iOS App Store
+          const appStoreLinks = document.querySelectorAll('a[href*="apps.apple.com"]');
+
+          appStoreLinks.forEach(function(link) {
+            // Update the href if on Android
+            if (isAndroid()) {
+              link.href = targetURL;
+            }
+            // iOS links stay as they are (already correct)
+          });
+
+          console.log('App store links updated for:', isIOS() ? 'iOS' : isAndroid() ? 'Android' : 'Desktop');
+        }
+
+        // Run on page load
+        document.addEventListener('DOMContentLoaded', updateAppStoreLinks);
+      })();
     </script>
 
     <!-- Cookie Consent Banner -->
