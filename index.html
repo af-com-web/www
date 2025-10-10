@@ -451,6 +451,228 @@
         showAppBanner();
       });
     </script>
+
+    <!-- Cookie Consent Banner -->
+    <style>
+      .cookie-consent-banner {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        padding: 16px 24px;
+        max-width: 600px;
+        width: 90%;
+        z-index: 9999;
+        display: none;
+        animation: slideUp 0.4s ease-out;
+      }
+
+      .dark .cookie-consent-banner {
+        background: rgba(30, 30, 30, 0.98);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      .cookie-consent-content {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .cookie-consent-text {
+        flex: 1;
+        min-width: 200px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;
+      }
+
+      .dark .cookie-consent-text {
+        color: #e0e0e0;
+      }
+
+      .cookie-consent-text a {
+        color: #667eea;
+        text-decoration: underline;
+        font-weight: 600;
+      }
+
+      .cookie-consent-text a:hover {
+        color: #764ba2;
+      }
+
+      .cookie-consent-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .cookie-consent-btn {
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .cookie-consent-btn-accept {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .cookie-consent-btn-accept:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      .cookie-consent-btn-decline {
+        background: transparent;
+        color: #666;
+        border: 1px solid #ddd;
+      }
+
+      .dark .cookie-consent-btn-decline {
+        color: #aaa;
+        border-color: #555;
+      }
+
+      .cookie-consent-btn-decline:hover {
+        background: #f5f5f5;
+      }
+
+      .dark .cookie-consent-btn-decline:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      @media (max-width: 576px) {
+        .cookie-consent-banner {
+          bottom: 10px;
+          padding: 14px 18px;
+        }
+
+        .cookie-consent-content {
+          gap: 12px;
+        }
+
+        .cookie-consent-text {
+          font-size: 13px;
+        }
+
+        .cookie-consent-buttons {
+          width: 100%;
+        }
+
+        .cookie-consent-btn {
+          flex: 1;
+          padding: 10px 16px;
+        }
+      }
+    </style>
+
+    <div id="cookieConsentBanner" class="cookie-consent-banner">
+      <div class="cookie-consent-content">
+        <div class="cookie-consent-text">
+          We use cookies to improve your experience and analyze site traffic. By clicking "Accept", you consent to our use of cookies. <a href="privacy.html">Learn more</a>
+        </div>
+        <div class="cookie-consent-buttons">
+          <button class="cookie-consent-btn cookie-consent-btn-decline" id="cookieDecline">Decline</button>
+          <button class="cookie-consent-btn cookie-consent-btn-accept" id="cookieAccept">Accept</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const COOKIE_CONSENT_KEY = 'animaFelixCookieConsent';
+        const banner = document.getElementById('cookieConsentBanner');
+        const acceptBtn = document.getElementById('cookieAccept');
+        const declineBtn = document.getElementById('cookieDecline');
+
+        // Check if user has already made a choice
+        function hasConsent() {
+          return localStorage.getItem(COOKIE_CONSENT_KEY) !== null;
+        }
+
+        // Get consent status
+        function getConsentStatus() {
+          return localStorage.getItem(COOKIE_CONSENT_KEY) === 'accepted';
+        }
+
+        // Show banner if no consent has been given
+        function showBanner() {
+          if (!hasConsent()) {
+            banner.style.display = 'block';
+          }
+        }
+
+        // Hide banner
+        function hideBanner() {
+          banner.style.display = 'none';
+        }
+
+        // Handle accept
+        function acceptCookies() {
+          localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted');
+          hideBanner();
+
+          // Enable tracking scripts if needed
+          console.log('Cookies accepted - Analytics enabled');
+
+          // Google Analytics is already loaded, but you could reinitialize here if needed
+          // The tracking will continue normally
+        }
+
+        // Handle decline
+        function declineCookies() {
+          localStorage.setItem(COOKIE_CONSENT_KEY, 'declined');
+          hideBanner();
+
+          // Disable tracking
+          console.log('Cookies declined - Analytics disabled');
+
+          // Disable Google Analytics
+          window['ga-disable-G-JMJJRPNKJY'] = true;
+
+          // Clear any existing cookies
+          document.cookie.split(";").forEach(function(c) {
+            document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+          });
+        }
+
+        // Event listeners
+        acceptBtn.addEventListener('click', acceptCookies);
+        declineBtn.addEventListener('click', declineCookies);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+          // If user previously declined, disable tracking
+          if (hasConsent() && !getConsentStatus()) {
+            window['ga-disable-G-JMJJRPNKJY'] = true;
+          }
+
+          // Show banner if no consent given
+          showBanner();
+        });
+      })();
+    </script>
   </body>
 
 </html>
