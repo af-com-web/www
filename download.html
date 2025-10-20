@@ -754,14 +754,93 @@
       })();
     </script>
 
-    <!-- Mobile App Redirect Script - Executes immediately on mobile devices -->
+    <!-- Fallback Download Button Styles -->
+    <style>
+        #downloadFallback {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        #downloadFallback.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .download-btn-container {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .download-btn-container h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .download-btn-container p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .download-btn-main {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .download-btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn-main:active {
+            transform: translateY(0);
+        }
+    </style>
+
+    <!-- Fallback Download Button (shown if automatic redirect fails) -->
+    <div id="downloadFallback">
+        <div class="download-btn-container">
+            <h1>Get Anima Felix</h1>
+            <p>Tap below to download the app and start your mental wellness journey</p>
+            <a href="#" class="download-btn-main" id="downloadBtn">Download Now</a>
+        </div>
+    </div>
+
+    <!-- Mobile App Redirect Script - TikTok browser compatible -->
     <script>
         (function() {
-            // iOS App Store URL
-            const IOS_URL = 'https://apps.apple.com/app/id6708235955';
+            // iOS App Store URL - Match the URLs used elsewhere in the page
+            const IOS_URL = 'https://apps.apple.com/app/apple-store/id6708235955?pt=127752760&ct=web&mt=8';
 
             // Google Play Store URL
             const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.animafelix';
+
+            let redirectAttempted = false;
 
             /**
              * Detect if the device is iOS
@@ -787,6 +866,14 @@
             }
 
             /**
+             * Detect if user is in TikTok's in-app browser
+             */
+            function isTikTok() {
+                const userAgent = window.navigator.userAgent.toLowerCase();
+                return /tiktok|musical_ly|bytedance|bytelocale/i.test(userAgent);
+            }
+
+            /**
              * Track TikTok Pixel events
              */
             function trackTikTokEvents(deviceType) {
@@ -809,24 +896,48 @@
                     "currency": "USD"
                 });
 
-                // Track ClickButton event - user is being redirected to app store
-                ttq.track('ClickButton', {
-                    "contents": [
-                        {
-                            "content_id": deviceType === 'ios' ? 'app_store_ios' : 'app_store_android',
-                            "content_type": "product",
-                            "content_name": deviceType === 'ios' ? 'iOS App Store Redirect' : 'Google Play Store Redirect'
-                        }
-                    ],
-                    "value": 0,
-                    "currency": "USD"
-                });
-
-                console.log('TikTok events tracked for device type:', deviceType);
+                console.log('TikTok ViewContent event tracked for device type:', deviceType);
             }
 
             /**
-             * Perform the redirect based on device detection
+             * Track app store click
+             */
+            function trackAppStoreClick(deviceType) {
+                if (typeof ttq !== 'undefined') {
+                    ttq.track('ClickButton', {
+                        "contents": [
+                            {
+                                "content_id": deviceType === 'ios' ? 'app_store_ios' : 'app_store_android',
+                                "content_type": "product",
+                                "content_name": deviceType === 'ios' ? 'iOS App Store Click' : 'Google Play Store Click'
+                            }
+                        ],
+                        "value": 0,
+                        "currency": "USD"
+                    });
+                    console.log('TikTok ClickButton event tracked for:', deviceType);
+                }
+            }
+
+            /**
+             * Show fallback button if redirect fails
+             */
+            function showFallbackButton(url, deviceType) {
+                const fallback = document.getElementById('downloadFallback');
+                const btn = document.getElementById('downloadBtn');
+
+                if (fallback && btn) {
+                    btn.href = url;
+                    btn.onclick = function() {
+                        trackAppStoreClick(deviceType);
+                    };
+                    fallback.classList.add('show');
+                    console.log('Showing fallback download button for:', deviceType);
+                }
+            }
+
+            /**
+             * Show download button instead of redirect
              */
             function redirect() {
                 let redirectURL;
@@ -835,29 +946,28 @@
                 if (isIOS()) {
                     redirectURL = IOS_URL;
                     deviceType = 'ios';
-                    console.log('iOS device detected, redirecting to App Store immediately');
                 } else if (isAndroid()) {
                     redirectURL = ANDROID_URL;
                     deviceType = 'android';
-                    console.log('Android device detected, redirecting to Google Play immediately');
                 } else {
-                    // Desktop users go to the homepage
-                    redirectURL = 'index.html';
-                    deviceType = 'desktop';
-                    console.log('Desktop device detected, redirecting to homepage immediately');
+                    // Desktop users stay on the page
+                    return;
                 }
 
-                // Track TikTok events before redirect (only for mobile)
-                if (isMobile()) {
-                    trackTikTokEvents(deviceType);
-                }
+                // Track page view
+                trackTikTokEvents(deviceType);
 
-                // Immediate redirect (0ms delay)
-                window.location.href = redirectURL;
+                // Show download button for all mobile users (no automatic redirect)
+                console.log('Mobile device detected, showing download button for:', deviceType);
+                showFallbackButton(redirectURL, deviceType);
             }
 
-            // Execute redirect immediately when script loads
-            redirect();
+            // Execute when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', redirect);
+            } else {
+                redirect();
+            }
         })();
     </script>
 </body>
