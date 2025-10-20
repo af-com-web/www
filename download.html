@@ -49,6 +49,51 @@
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
 
     <meta name="theme-color" content="#ffffff">
+
+    <!-- Early mobile detection to prevent page flash -->
+    <script>
+      (function() {
+        function isMobileDevice() {
+          const ua = navigator.userAgent.toLowerCase();
+          return /iphone|ipad|ipod|android/.test(ua);
+        }
+
+        if (isMobileDevice()) {
+          // Hide page content immediately for mobile users
+          document.documentElement.style.overflow = 'hidden';
+          document.documentElement.classList.add('mobile-download-mode');
+        }
+      })();
+    </script>
+
+    <style>
+      /* Hide page content on mobile when download overlay is shown */
+      .mobile-download-mode .main,
+      .mobile-download-mode .bg-body-emphasis {
+        display: none !important;
+      }
+
+      .mobile-download-mode body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* Show overlay immediately on mobile */
+      .mobile-download-mode #downloadFallback {
+        display: flex !important;
+        animation: none;
+      }
+
+      /* Prevent cookie banner and app banner from showing on mobile download page */
+      .mobile-download-mode #cookieConsentBanner,
+      .mobile-download-mode .app-banner {
+        display: none !important;
+      }
+    </style>
+
     <script src="assets/vendors/simplebar/simplebar.min.js" defer></script>
     <script src="assets/js/config.js"></script>
 
@@ -1075,7 +1120,7 @@
             }
 
             /**
-             * Show fallback button if redirect fails
+             * Setup download button
              */
             function showFallbackButton(url, deviceType) {
                 const fallback = document.getElementById('downloadFallback');
@@ -1086,8 +1131,11 @@
                     btn.onclick = function() {
                         trackAppStoreClick(deviceType);
                     };
-                    fallback.classList.add('show');
-                    console.log('Showing fallback download button for:', deviceType);
+                    // Only add .show class if not already in mobile-download-mode
+                    if (!document.documentElement.classList.contains('mobile-download-mode')) {
+                        fallback.classList.add('show');
+                    }
+                    console.log('Download button configured for:', deviceType);
                 }
             }
 
