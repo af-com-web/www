@@ -903,6 +903,7 @@
              * Track app store click
              */
             function trackAppStoreClick(deviceType) {
+                // Track with TikTok Pixel
                 if (typeof ttq !== 'undefined') {
                     ttq.track('ClickButton', {
                         "contents": [
@@ -916,6 +917,17 @@
                         "currency": "USD"
                     });
                     console.log('TikTok ClickButton event tracked for:', deviceType);
+                }
+
+                // Track with Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'download_button_click', {
+                        'event_category': 'App Download',
+                        'event_label': deviceType === 'ios' ? 'iOS App Store' : 'Google Play Store',
+                        'platform': deviceType,
+                        'page_location': window.location.href
+                    });
+                    console.log('Google Analytics download_button_click event tracked for:', deviceType);
                 }
             }
 
