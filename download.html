@@ -854,44 +854,43 @@
         }
 
         .download-btn-main {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             background: white;
-            color: #667eea;
-            padding: 18px 56px;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 800;
+            color: #1a1a1a;
+            padding: 16px 48px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             position: relative;
-            overflow: hidden;
+            letter-spacing: -0.2px;
         }
 
-        .download-btn-main::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .download-btn-main:hover::before {
-            left: 100%;
+        .download-btn-main svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.2s ease;
         }
 
         .download-btn-main:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            background: #f8f8f8;
+        }
+
+        .download-btn-main:hover svg {
+            transform: translateY(-2px);
         }
 
         .download-btn-main:active {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .download-features {
@@ -938,9 +937,10 @@
             }
 
             .download-btn-main {
-                padding: 16px 48px;
+                padding: 18px 40px;
                 font-size: 17px;
                 width: 100%;
+                max-width: 280px;
             }
 
             .download-features {
@@ -958,7 +958,14 @@
             </div>
             <h1>Get Anima Felix</h1>
             <p>Your digital safe space for mental wellness. Start your journey today.</p>
-            <a href="#" class="download-btn-main" id="downloadBtn">Download Now</a>
+            <a href="#" class="download-btn-main" id="downloadBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download App
+            </a>
             <div class="download-features">
                 <span class="download-feature">Free to Download</span>
                 <span class="download-feature">Privacy First</span>
