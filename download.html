@@ -49,7 +49,7 @@
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
 
     <meta name="theme-color" content="#ffffff">
-    <script src="assets/vendors/simplebar/simplebar.min.js"></script>
+    <script src="assets/vendors/simplebar/simplebar.min.js" defer></script>
     <script src="assets/js/config.js"></script>
 
 
@@ -58,9 +58,12 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://analytics.tiktok.com">
+    <link rel="preconnect" href="https://unicons.iconscout.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link href="assets/vendors/simplebar/simplebar.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" media="print" onload="this.media='all'">
     <link href="assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
     <link href="assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
@@ -144,7 +147,7 @@
     <main class="main" id="top">
       <div class="bg-body-emphasis sticky-top" data-navbar-shadow-on-scroll="data-navbar-shadow-on-scroll">
         <nav class="navbar navbar-expand-lg container-small px-3 px-lg-7 px-xxl-3"><a class="navbar-brand flex-1 flex-lg-grow-0" href="index.html">
-            <div class="d-flex align-items-center"><img src="logo.png" alt="Anima Felix - Mental Wellness App Logo" width="27" />
+            <div class="d-flex align-items-center"><img src="logo.png" alt="Anima Felix - Mental Wellness App Logo" width="27" height="27" fetchpriority="high" />
               <p class="logo-text ms-2">Anima Felix</p>
             </div>
           </a>
@@ -185,12 +188,12 @@
                 </div>
                 <!--/.bg-holder-->
 
-                <div class="position-relative"><img class="w-100 shadow-lg d-dark-none rounded-2" src="bg-animafelix.jpg" alt="Anima Felix mental wellness app interface on smartphone" /><img class="w-100 shadow-lg d-light-none rounded-2" src="bg-animafelix.jpg" alt="Anima Felix mental wellness app interface on smartphone" /></div>
+                <div class="position-relative"><img class="w-100 shadow-lg d-dark-none rounded-2" src="bg-animafelix.jpg" alt="Anima Felix mental wellness app interface on smartphone" width="600" height="1200" fetchpriority="high" /><img class="w-100 shadow-lg d-light-none rounded-2" src="bg-animafelix.jpg" alt="Anima Felix mental wellness app interface on smartphone" width="600" height="1200" fetchpriority="high" /></div>
               </div>
               <div class="hero-image-container position-absolute top-0 bottom-0 end-0 d-none d-lg-block">
                 <div class="position-relative h-100 w-100">
-                  <div class="position-absolute h-100 top-0 d-flex align-items-center end-0 hero-image-container-bg"><img class="pt-7 pt-md-0 w-100" src="assets/img/bg/bg-1-2.png" alt="hero-header" /></div>
-                  <div class="position-absolute h-100 top-0 d-flex align-items-center end-0"><img class="pt-7 pt-md-0 w-100 shadow-lg d-dark-none rounded-2" src="bg-animafelix.jpg" alt="Anima Felix mental wellness app dashboard view" /><img class="pt-7 pt-md-0 w-100 shadow-lg d-light-none rounded-2" src="bg-animafelix.jpg" alt="Anima Felix mental wellness app dashboard view" /></div>
+                  <div class="position-absolute h-100 top-0 d-flex align-items-center end-0 hero-image-container-bg"><img class="pt-7 pt-md-0 w-100" src="assets/img/bg/bg-1-2.png" alt="hero-header" width="800" height="1000" fetchpriority="high" /></div>
+                  <div class="position-absolute h-100 top-0 d-flex align-items-center end-0"><img class="pt-7 pt-md-0 w-100 shadow-lg d-dark-none rounded-2" src="bg-animafelix.jpg" alt="Anima Felix mental wellness app dashboard view" width="600" height="1200" fetchpriority="high" /><img class="pt-7 pt-md-0 w-100 shadow-lg d-light-none rounded-2" src="bg-animafelix.jpg" alt="Anima Felix mental wellness app dashboard view" width="600" height="1200" fetchpriority="high" /></div>
                 </div>
               </div>
             </div>
@@ -219,7 +222,7 @@
               </div>
               <div class="col-sm-6 col-lg-3 mt-7 text-center text-lg-start">
                 <div class="h-100 d-flex flex-column justify-content-between">
-                  <div class="border-start-lg border-translucent border-dashed ps-4"><img class="mb-4" src="assets/img/icons/illustrations/bolt.png" width="48" height="48" alt="Mood tracking and emotion visualization feature icon" />
+                  <div class="border-start-lg border-translucent border-dashed ps-4"><img class="mb-4" src="assets/img/icons/illustrations/bolt.png" width="48" height="48" alt="Mood tracking and emotion visualization feature icon" loading="lazy" />
                     <div>
                       <h5 class="fw-bolder mb-2">Vibe Check</h5>
                       <p class="fw-semibold lh-sm">Track your emotions with visual patterns that make self-awareness feel oddly satisfying.</p>
@@ -230,7 +233,7 @@
               </div>
               <div class="col-sm-6 col-lg-3 mt-7 text-center text-lg-start">
                 <div class="h-100 d-flex flex-column">
-                  <div class="border-start-lg border-translucent border-dashed ps-4"><img class="mb-4" src="assets/img/icons/illustrations/pie.png" width="48" height="48" alt="Mental wellness exercises feature icon" />
+                  <div class="border-start-lg border-translucent border-dashed ps-4"><img class="mb-4" src="assets/img/icons/illustrations/pie.png" width="48" height="48" alt="Mental wellness exercises feature icon" loading="lazy" />
                     <div>
                       <h5 class="fw-bolder mb-2">Feel Better</h5>
                       <p class="fw-semibold lh-sm">Quick mental wellness exercises for when you're one notification away from losing it.
@@ -242,7 +245,7 @@
               </div>
             </div>
             <div class="row mt-12 align-items-center justify-content-between text-center text-lg-start mb-6 mb-lg-0">
-              <div class="col-lg-5"><img class="feature-image img-fluid mb-9 mb-lg-0 d-dark-none" src="assets/img/spot-illustrations/22_2.png" alt="Anxiety management tools illustration" /><img class="feature-image img-fluid mb-9 mb-lg-0 d-light-none" src="assets/img/spot-illustrations/dark_22.png" alt="Anxiety management tools illustration" /></div>
+              <div class="col-lg-5"><img class="feature-image img-fluid mb-9 mb-lg-0 d-dark-none" src="assets/img/spot-illustrations/22_2.png" alt="Anxiety management tools illustration" width="600" height="450" loading="lazy" /><img class="feature-image img-fluid mb-9 mb-lg-0 d-light-none" src="assets/img/spot-illustrations/dark_22.png" alt="Anxiety management tools illustration" width="600" height="450" loading="lazy" /></div>
               <div class="col-lg-6">
                 <h6 class="text-primary mb-2 ls-2">UNWIND</h6>
                 <h3 class="fw-bolder mb-3">Anxiety Spirals</h3>
@@ -250,7 +253,7 @@
               </div>
             </div>
             <div class="row mt-2 align-items-center justify-content-between text-center text-lg-start mb-6 mb-lg-0">
-              <div class="col-lg-5 order-0 order-lg-1"><img class="feature-image img-fluid mb-9 mb-lg-0 d-dark-none" src="assets/img/spot-illustrations/23_2.png" height="394" alt="Burnout recovery and stress management illustration" /><img class="feature-image img-fluid mb-9 mb-lg-0 d-light-none" src="assets/img/spot-illustrations/dark_23.png" height="394" alt="Burnout recovery and stress management illustration" /></div>
+              <div class="col-lg-5 order-0 order-lg-1"><img class="feature-image img-fluid mb-9 mb-lg-0 d-dark-none" src="assets/img/spot-illustrations/23_2.png" width="600" height="394" alt="Burnout recovery and stress management illustration" loading="lazy" /><img class="feature-image img-fluid mb-9 mb-lg-0 d-light-none" src="assets/img/spot-illustrations/dark_23.png" width="600" height="394" alt="Burnout recovery and stress management illustration" loading="lazy" /></div>
               <div class="col-lg-6">
                 <h6 class="text-primary mb-2 ls-2">RECHARGE</h6>
                 <h3 class="fw-bolder mb-3">Burnout SOS</h3>
@@ -258,7 +261,7 @@
               </div>
             </div>
             <div class="row mt-2 align-items-center justify-content-between text-center text-lg-start mb-6 mb-lg-0">
-              <div class="col-lg-5"><img class="feature-image img-fluid mb-9 mb-lg-0 d-dark-none" src="assets/img/spot-illustrations/24_2.png" height="394" alt="Self-worth and confidence building tools illustration" /><img class="feature-image img-fluid mb-9 mb-lg-0 d-light-none" src="assets/img/spot-illustrations/dark_24.png" height="394" alt="Self-worth and confidence building tools illustration" /></div>
+              <div class="col-lg-5"><img class="feature-image img-fluid mb-9 mb-lg-0 d-dark-none" src="assets/img/spot-illustrations/24_2.png" width="600" height="394" alt="Self-worth and confidence building tools illustration" loading="lazy" /><img class="feature-image img-fluid mb-9 mb-lg-0 d-light-none" src="assets/img/spot-illustrations/dark_24.png" width="600" height="394" alt="Self-worth and confidence building tools illustration" loading="lazy" /></div>
               <div class="col-lg-6 text-center text-lg-start">
                 <h6 class="text-primary mb-2 ls-2">BOOST</h6>
                 <h3 class="fw-bolder mb-3">Self-Worth Reset</h3>
@@ -285,7 +288,7 @@
                 <div class="bg-holder" style="background-image:url(assets/img/bg/bg-18.png);background-position:right;background-size:auto;">
                 </div>
                 <!--/.bg-holder-->
-                <div class="card-body position-relative"><img class="img-fluid mb-5 d-dark-none" src="assets/img/spot-illustrations/27.png" width="210" alt="Anima Felix mental wellness support illustration" /><img class="img-fluid mb-5 d-light-none" src="assets/img/spot-illustrations/dark_27.png" width="210" alt="Anima Felix mental wellness support illustration" />
+                <div class="card-body position-relative"><img class="img-fluid mb-5 d-dark-none" src="assets/img/spot-illustrations/27.png" width="210" height="210" alt="Anima Felix mental wellness support illustration" loading="lazy" /><img class="img-fluid mb-5 d-light-none" src="assets/img/spot-illustrations/dark_27.png" width="210" height="210" alt="Anima Felix mental wellness support illustration" loading="lazy" />
 
                   <div class="d-flex align-items-center fw-bold justify-content-center mb-3">
                     <p class="mb-0">HIPAA & GDPR compliant</p>
@@ -333,7 +336,7 @@
 
             <div class="container-small px-lg-7 px-xxl-3">
               <div class="row position-relative">
-                <div class="col-12 col-sm-12 col-lg-5 mb-4 order-0 order-sm-0"><a href="index.html"><img class="mb-3" src="logo.png" height="48" alt="" /></a>
+                <div class="col-12 col-sm-12 col-lg-5 mb-4 order-0 order-sm-0"><a href="index.html"><img class="mb-3" src="logo.png" width="48" height="48" alt="Anima Felix Logo" loading="lazy" /></a>
                   <h3 class="text-white">Anima Felix</h3>
                   <p class="text-white opacity-50">The app that cares about you</p>
                 </div>
@@ -386,21 +389,21 @@
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
-    <script src="assets/vendors/popper/popper.min.js"></script>
-    <script src="assets/vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="assets/vendors/anchorjs/anchor.min.js"></script>
-    <script src="assets/vendors/is/is.min.js"></script>
-    <script src="assets/vendors/fontawesome/all.min.js"></script>
-    <script src="assets/vendors/lodash/lodash.min.js"></script>
-    <script src="assets/vendors/list.js/list.min.js"></script>
-    <script src="assets/vendors/feather-icons/feather.min.js"></script>
-    <script src="assets/vendors/dayjs/dayjs.min.js"></script>
-    <script src="assets/js/phoenix.js"></script>
-    <script src="assets/vendors/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/vendors/isotope-packery/packery-mode.pkgd.min.js"></script>
-    <script src="assets/vendors/bigpicture/BigPicture.js"></script>
-    <script src="assets/vendors/countup/countUp.umd.js"></script>
+    <script src="assets/vendors/popper/popper.min.js" defer></script>
+    <script src="assets/vendors/bootstrap/bootstrap.min.js" defer></script>
+    <script src="assets/vendors/anchorjs/anchor.min.js" defer></script>
+    <script src="assets/vendors/is/is.min.js" defer></script>
+    <script src="assets/vendors/fontawesome/all.min.js" defer></script>
+    <script src="assets/vendors/lodash/lodash.min.js" defer></script>
+    <script src="assets/vendors/list.js/list.min.js" defer></script>
+    <script src="assets/vendors/feather-icons/feather.min.js" defer></script>
+    <script src="assets/vendors/dayjs/dayjs.min.js" defer></script>
+    <script src="assets/js/phoenix.js" defer></script>
+    <script src="assets/vendors/isotope-layout/isotope.pkgd.min.js" defer></script>
+    <script src="assets/vendors/imagesloaded/imagesloaded.pkgd.min.js" defer></script>
+    <script src="assets/vendors/isotope-packery/packery-mode.pkgd.min.js" defer></script>
+    <script src="assets/vendors/bigpicture/BigPicture.js" defer></script>
+    <script src="assets/vendors/countup/countUp.umd.js" defer></script>
 
     <!-- Mobile Detection and Custom App Banner Script -->
     <script>
@@ -769,65 +772,198 @@
             align-items: center;
             flex-direction: column;
             padding: 20px;
-            animation: fadeIn 0.3s ease-in;
+            animation: fadeIn 0.4s ease-out;
         }
 
         #downloadFallback.show {
             display: flex;
         }
 
+        #downloadFallback::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .download-btn-container {
             text-align: center;
-            max-width: 400px;
+            max-width: 420px;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .download-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-logo img {
+            width: 56px;
+            height: 56px;
         }
 
         .download-btn-container h1 {
             color: white;
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 16px;
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .download-btn-container p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 16px;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 17px;
+            line-height: 1.5;
             margin-bottom: 32px;
+            font-weight: 400;
         }
 
         .download-btn-main {
             display: inline-block;
             background: white;
             color: #667eea;
-            padding: 18px 48px;
-            border-radius: 50px;
+            padding: 18px 56px;
+            border-radius: 16px;
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 800;
             text-decoration: none;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .download-btn-main:hover::before {
+            left: 100%;
         }
 
         .download-btn-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
         .download-btn-main:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-features {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .download-feature {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .download-feature::before {
+            content: '✓';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .download-btn-container {
+                padding: 40px 24px;
+                max-width: 90%;
+            }
+
+            .download-btn-container h1 {
+                font-size: 28px;
+            }
+
+            .download-btn-container p {
+                font-size: 16px;
+            }
+
+            .download-btn-main {
+                padding: 16px 48px;
+                font-size: 17px;
+                width: 100%;
+            }
+
+            .download-features {
+                flex-direction: column;
+                gap: 12px;
+            }
         }
     </style>
 
     <!-- Fallback Download Button (shown if automatic redirect fails) -->
     <div id="downloadFallback">
         <div class="download-btn-container">
+            <div class="download-logo">
+                <img src="logo.png" alt="Anima Felix">
+            </div>
             <h1>Get Anima Felix</h1>
-            <p>Tap below to download the app and start your mental wellness journey</p>
+            <p>Your digital safe space for mental wellness. Start your journey today.</p>
             <a href="#" class="download-btn-main" id="downloadBtn">Download Now</a>
+            <div class="download-features">
+                <span class="download-feature">Free to Download</span>
+                <span class="download-feature">Privacy First</span>
+                <span class="download-feature">AI Powered</span>
+            </div>
         </div>
     </div>
 
