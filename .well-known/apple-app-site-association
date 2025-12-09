@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "KQ7FR9B4VG.com.cochinescu.animafelix",
+        "paths": ["*"]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["KQ7FR9B4VG.com.cochinescu.animafelix"]
+  }
+}
