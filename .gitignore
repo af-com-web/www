@@ -1,1 +1,6 @@
 .DS_Store
+*.md
+new-website/*
+.claude/*
+htw-form/*
+temp-astro/*
